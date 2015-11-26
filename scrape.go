@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-
+	"github.com/fatih/color"
 	"github.com/yhat/scrape"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
+	"net/http"
 )
 
 func main() {
@@ -28,9 +28,11 @@ func main() {
 		}
 		return false
 	}
+	yellow := color.New(color.FgYellow).SprintFunc()
+
 	// grab all articles and print them
 	articles := scrape.FindAll(root, matcher)
 	for i, article := range articles {
-		fmt.Printf("%2d %s (%s)\n", i, scrape.Text(article), scrape.Attr(article, "href"))
+		fmt.Printf("%2d %s (%s)\n", i, yellow(scrape.Text(article)), scrape.Attr(article, "href"))
 	}
 }
