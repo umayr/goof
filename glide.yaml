@@ -1,0 +1,5 @@
+package: main
+import:
+  - package: golang.org/x/net
+  - package: github.com/yhat/scrape
+  - package: github.com/fatih/color
