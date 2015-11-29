@@ -1,9 +1,10 @@
 package main
 import (
 	"fmt"
+	"os"
 	"goof/plugs"
 	"github.com/codegangsta/cli"
-	"os"
+	"goof/util"
 )
 
 func main() {
@@ -40,15 +41,26 @@ func main() {
 			os.Setenv("DEBUG", "*")
 		}
 
+		db := util.NewDb()
+		defer db.Close()
+
+		Posts := db.Posts()
+
 		switch plug {
 		case "tech-crunch":
 			t := plugs.NewTechCrunch()
-			
+
 			for p := 1; p <= page; p++ {
 				posts := t.Next()
 
+
 				for i := range posts {
-					fmt.Printf("%s\n", posts[i].Json())
+					err := Posts.Insert(&posts[i])
+					if err != nil {
+						panic(err)
+					} else {
+						fmt.Printf("%s\n", posts[i].Json())
+					}
 				}
 			}
 			break
