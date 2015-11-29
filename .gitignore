@@ -28,3 +28,6 @@ _testmain.go
 
 # IDE conf
 **/.idea/
+
+# Runnable
+goof
