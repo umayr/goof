@@ -2,7 +2,7 @@ package plugs
 
 import (
 	"time"
-	"goof/types"
+	"goof/models"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/tj/go-debug"
 	"github.com/briandowns/spinner"
@@ -33,12 +33,12 @@ func (t *TechCrunch) Load(url string) (doc *goquery.Document) {
 	return doc
 }
 
-func (t *TechCrunch) Meta(url string, post *types.Post) {
+func (t *TechCrunch) Meta(url string, post *models.Post) {
 	doc := t.Load(url)
 
 	t.debug("Loading: %s", url);
 
-	m := new(types.Meta)
+	m := new(models.Meta)
 
 	doc.Find("meta").Each(func(i int, s *goquery.Selection) {
 		t, e := s.Attr("name")
@@ -52,7 +52,6 @@ func (t *TechCrunch) Meta(url string, post *types.Post) {
 				m.Categories = append(m.Categories, val)
 				break
 			case "timestamp":
-				layout := ""
 				t, _ := time.Parse(layout, val)
 				m.Time = t
 				break
@@ -73,10 +72,10 @@ func (t *TechCrunch) Meta(url string, post *types.Post) {
 	post.Meta = *m
 }
 
-func (t *TechCrunch) Posts(url string) (posts []types.Post) {
+func (t *TechCrunch) Posts(url string) (posts []models.Post) {
 	doc := t.Load(url)
 
-	channel := make(chan types.Post)
+	channel := make(chan models.Post)
 	s := doc.Find("ul.river li .block-content")
 
 	for i := range s.Nodes {
@@ -84,7 +83,7 @@ func (t *TechCrunch) Posts(url string) (posts []types.Post) {
 			title := s.Find("h2.post-title").Text()
 			url, exists := s.Find("h2.post-title > a").Attr("href")
 
-			post := types.Post{Title: title, Url: url}
+			post := models.Post{Title: title, Url: url, Origin: name}
 			if exists {
 				t.Meta(url, &post)
 			}
@@ -110,7 +109,7 @@ func (t *TechCrunch) Posts(url string) (posts []types.Post) {
 	}
 }
 
-func (t *TechCrunch) Next() (posts []types.Post) {
+func (t *TechCrunch) Next() (posts []models.Post) {
 	url := baseUrl + "page/" + string(t.page)
 	return t.Posts(url)
 }
