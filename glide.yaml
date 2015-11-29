@@ -1,7 +1,20 @@
-package: main
+package: goof
 import:
 - package: golang.org/x/net
-- package: github.com/yhat/scrape
+  version: 55cccaa02af1a99c69ba3213e33468628b61be4b
 - package: github.com/fatih/color
+  version: 9aae6aaa22315390f03959adca2c4d395b02fcef
 - package: github.com/mattn/go-colorable
+  version: 3dac7b4f76f6e17fb39b768b89e3783d16e237fe
 - package: github.com/mattn/go-isatty
+  version: 3f7a6730f55096ff7cd34816f520d9f4517e95ea
+- package: github.com/tj/go-debug
+  version: ff4a55a20a86994118644bbddc6a216da193cc13
+- package: github.com/PuerkitoBio/goquery
+  version: 417cce822c7b9a379df5824be95228d177c5698b
+- package: github.com/andybalholm/cascadia
+  version: 3ad29d1ad1c4f2023e355603324348cf1f4b2d48
+- package: github.com/codegangsta/cli
+  version: 0302d3914d2a6ad61404584cdae6e6dbc9c03599
+- package: github.com/briandowns/spinner
+  version: 8f635eac696505ff5f68b163b6d1320633b5ddce
