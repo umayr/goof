@@ -19,3 +19,4 @@ import:
 - package: github.com/briandowns/spinner
   version: 8f635eac696505ff5f68b163b6d1320633b5ddce
 - package: gopkg.in/mgo.v2
+  version: 4d04138ffef2791c479c0c8bbffc30b34081b8d9
