@@ -24,4 +24,7 @@ _testmain.go
 *.prof
 
 # Deps folder
-vendor
+**/vendor/
+
+# IDE conf
+**/.idea/
