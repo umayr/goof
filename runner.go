@@ -10,12 +10,19 @@ func main() {
 	var (
 		plug string
 		debug bool
+		page int
 	)
 
 	app := cli.NewApp()
 	app.Name = "goof"
 	app.Usage = "Extracts blogs from top web magazines"
 	app.Flags = []cli.Flag{
+		cli.IntFlag{
+			Name: "page",
+			Value: 1,
+			Usage: "Tells how many pages need to be extracted",
+			Destination: &page,
+		},
 		cli.StringFlag{
 			Name: "plug",
 			Value: "",
@@ -36,10 +43,13 @@ func main() {
 		switch plug {
 		case "tech-crunch":
 			t := plugs.NewTechCrunch()
-			posts := t.Next()
+			
+			for p := 1; p <= page; p++ {
+				posts := t.Next()
 
-			for i := range posts {
-				fmt.Printf("%s\n", posts[i].Json())
+				for i := range posts {
+					fmt.Printf("%s\n", posts[i].Json())
+				}
 			}
 			break
 		default:
