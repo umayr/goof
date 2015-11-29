@@ -19,19 +19,19 @@ func main() {
 	app.Usage = "Extracts blogs from top web magazines"
 	app.Flags = []cli.Flag{
 		cli.IntFlag{
-			Name: "page",
+			Name: "page, p",
 			Value: 1,
 			Usage: "Tells how many pages need to be extracted",
 			Destination: &page,
 		},
 		cli.StringFlag{
-			Name: "plug",
+			Name: "plug, u",
 			Value: "",
 			Usage: "Tells which plug needs to be invoked",
 			Destination: &plug,
 		},
 		cli.BoolFlag{
-			Name: "debug",
+			Name: "debug, d",
 			Usage: "Turns on the debug mode",
 			Destination: &debug,
 		},
