@@ -39,8 +39,8 @@ GLOBAL OPTIONS:
 
 ## Setup
 ```bash
-# Make sure you have go 1.5+ and mongodb 3.0+ installed and `GO15VENDOREXPERIMENT` enabled.
-# Download glide via brew
+# Make sure you have go 1.5+ and mongodb 3.0+ installed and `GO15VENDOREXPERIMENT` enabled (not necessary for 1.6)
+# Download glide via brew (for Linux, install binaries)
 λ brew install glide
 
 # Clone this project in <GOPATH>/src directory
@@ -49,5 +49,7 @@ GLOBAL OPTIONS:
 # Install dependencies
 λ glide install
 
+# If you're using golang-plugin in IDEA. For more info (https://github.com/go-lang-plugin-org/go-lang-idea-plugin/issues/1820)
+λ bash deps.sh
 
 ```
